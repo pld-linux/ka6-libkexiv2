@@ -2,19 +2,19 @@
 # Conditional build:
 %bcond_with	tests		# build with tests
 
-%define		kdeappsver	25.04.0
+%define		kdeappsver	25.04.1
 %define		kframever	5.94.0
 %define		qtver		5.15.2
 %define		kaname		libkexiv2
 Summary:	libkexiv2 - KDE Exiv2 wrapper
 Summary(pl.UTF-8):	libexiv2 - obudowanie Exiv2 dla KDE
 Name:		ka6-%{kaname}
-Version:	25.04.0
+Version:	25.04.1
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Applications
 Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	1178173b3f0eca164fa859dd9f21c316
+# Source0-md5:	4d90835b02da4f120f66cbfdb8a96fac
 URL:		https://kde.org/
 BuildRequires:	Qt6Core-devel >= %{qtver}
 BuildRequires:	Qt6Gui-devel >= %{qtver}
