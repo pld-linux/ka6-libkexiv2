@@ -29,7 +29,7 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	Qt6Core >= %{qt_ver}
 Requires:	Qt6Gui >= %{qt_ver}
-Requires:	exiv2 >= 0.25
+Requires:	exiv2-libs >= 0.25
 # don't obsolete until ka5 exists in PLD
 #Obsoletes:	ka5-libkexiv2 < 24
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
