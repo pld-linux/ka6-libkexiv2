@@ -1,10 +1,9 @@
 #
 # Conditional build:
-%bcond_with	tests		# build with tests
+%bcond_with	tests		# test suite
 
-%define		kdeappsver	25.04.2
-%define		kframever	5.94.0
-%define		qtver		5.15.2
+%define		kf_ver		5.94.0
+%define		qt_ver		6.5.0
 %define		kaname		libkexiv2
 Summary:	libkexiv2 - KDE Exiv2 wrapper
 Summary(pl.UTF-8):	libexiv2 - obudowanie Exiv2 dla KDE
@@ -13,20 +12,24 @@ Version:	25.04.2
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Applications
-Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
+Source0:	https://download.kde.org/stable/release-service/%{version}/src/%{kaname}-%{version}.tar.xz
 # Source0-md5:	2f08c8a352fc7ecd303eb3d8c3d4d45d
 URL:		https://kde.org/
-BuildRequires:	Qt6Core-devel >= %{qtver}
-BuildRequires:	Qt6Gui-devel >= %{qtver}
+BuildRequires:	Qt6Core-devel >= %{qt_ver}
+BuildRequires:	Qt6Gui-devel >= %{qt_ver}
 BuildRequires:	cmake >= 3.20
-BuildRequires:	exiv2-devel >= 0.24
-BuildRequires:	kf6-extra-cmake-modules >= %{kframever}
+BuildRequires:	exiv2-devel >= 0.25
+BuildRequires:	kf6-extra-cmake-modules >= %{kf_ver}
+BuildRequires:	libstdc++-devel >= 6:5
 BuildRequires:	ninja
-BuildRequires:	qt6-build >= %{qtver}
-BuildRequires:	rpmbuild(macros) >= 1.164
+BuildRequires:	qt6-build >= %{qt_ver}
+BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	shared-mime-info
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
+Requires:	Qt6Core >= %{qt_ver}
+Requires:	Qt6Gui >= %{qt_ver}
+Requires:	exiv2 >= 0.25
 Obsoletes:	ka5-%{kaname} < %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -41,6 +44,9 @@ Summary:	Header files for %{kaname} development
 Summary(pl.UTF-8):	Pliki nagłówkowe dla programistów używających %{kaname}
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	Qt6Core-devel >= %{qt_ver}
+Requires:	Qt6Gui-devel >= %{qt_ver}
+Requires:	libstdc++-devel >= 6:5
 Obsoletes:	ka5-%{kaname}-devel < %{version}
 
 %description devel
@@ -60,12 +66,12 @@ Pliki nagłówkowe dla programistów używających %{kaname}.
 	-DKDE_INSTALL_DOCBUNDLEDIR=%{_kdedocdir} \
 	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
 	-DQT_MAJOR_VERSION=6
+
 %ninja_build -C build
 
 %if %{with tests}
 ctest --test-dir build
 %endif
-
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -80,12 +86,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%ghost %{_libdir}/libKExiv2Qt6.so.0
 %{_libdir}/libKExiv2Qt6.so.*.*
+%ghost %{_libdir}/libKExiv2Qt6.so.0
 %{_datadir}/qlogging-categories6/libkexiv2.categories
 
 %files devel
 %defattr(644,root,root,755)
+%{_libdir}/libKExiv2Qt6.so
 %{_includedir}/KExiv2Qt6
 %{_libdir}/cmake/KExiv2Qt6
-%{_libdir}/libKExiv2Qt6.so
