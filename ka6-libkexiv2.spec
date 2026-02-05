@@ -8,12 +8,12 @@
 Summary:	libkexiv2 - KDE Exiv2 wrapper
 Summary(pl.UTF-8):	libexiv2 - obudowanie Exiv2 dla KDE
 Name:		ka6-%{kaname}
-Version:	25.12.1
+Version:	25.12.2
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Applications
 Source0:	https://download.kde.org/stable/release-service/%{version}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	0709219fe5e94902b78b9ae63980af70
+# Source0-md5:	54dcec7b1a420e8a7572203b9e3d9494
 URL:		https://kde.org/
 BuildRequires:	Qt6Core-devel >= %{qt_ver}
 BuildRequires:	Qt6Gui-devel >= %{qt_ver}
